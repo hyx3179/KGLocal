@@ -50,6 +50,9 @@ if not exist ..\logs mkdir ..\logs
 if not exist ..\temp mkdir ..\temp
 if not exist nginx-1.21.6\nginx.exe PowerShell -file getNginx.ps1 -Out %~dp0
 PowerShell -file getcatzh.ps1 -Out %~dp0
+if not exist ..\html\NummonCalc mkdir ..\html\NummonCalc
+if not exist ..\html\scientists mkdir ..\html\scientists
+if not exist ..\html\scientists-inf mkdir ..\html\scientists-inf
 PowerShell -file upgrade.ps1 -Out %~dp0
 echo 安装完成 点击 start.cmd 启动 或 main start
 pause
@@ -80,6 +83,7 @@ goto end
 
 :kill
 taskkill /f /t /im nginx.exe
+del /s /q %~dp0..\logs\nginx.pid
 goto end
 
 :end
