@@ -48,11 +48,14 @@ goto end
 cd /d %~dp0
 if not exist ..\logs mkdir ..\logs
 if not exist ..\temp mkdir ..\temp
+echo 下载 nginx
 if not exist nginx-1.21.6\nginx.exe PowerShell -file getNginx.ps1 -Out %~dp0
+echo 下载 猫国建设者
 PowerShell -file getcatzh.ps1 -Out %~dp0
 if not exist ..\html\NummonCalc mkdir ..\html\NummonCalc
 if not exist ..\html\scientists mkdir ..\html\scientists
 if not exist ..\html\scientists-inf mkdir ..\html\scientists-inf
+echo 下载 概览和珂学家
 PowerShell -file upgrade.ps1 -Out %~dp0
 echo 安装完成 点击 start.cmd 启动 或 main start
 pause
