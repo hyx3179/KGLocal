@@ -27,6 +27,7 @@ pause
 goto end
 
 :start
+start http://kg.com:3179/
 cd /d %~dp0..
 if exist .\logs\nginx.pid goto end
 start %~dp0nginx-1.21.6\nginx.exe
@@ -49,39 +50,28 @@ cd /d %~dp0
 if not exist ..\logs mkdir ..\logs
 if not exist ..\temp mkdir ..\temp
 echo 下载 nginx
-if not exist nginx-1.21.6\nginx.exe PowerShell -file getNginx.ps1 -Out %~dp0
+if exist nginx-1.21.6\nginx.exe goto nginxEnd
+PowerShell Invoke-WebRequest -Uri https://gitee.com/hyx3179/cat-zh/attach_files/1031881/download/nginx-1.21.6.zip -OutFile %~dp0nginx.zip
+PowerShell Expand-Archive -Path %~dp0nginx.zip -Force -DestinationPath %~dp0
+:nginxEnd
 echo 下载 猫国建设者
-PowerShell -file getcatzh.ps1 -Out %~dp0
-if not exist ..\html\NummonCalc mkdir ..\html\NummonCalc
-if not exist ..\html\scientists mkdir ..\html\scientists
-if not exist ..\html\scientists-inf mkdir ..\html\scientists-inf
+PowerShell Invoke-WebRequest -Uri https://gitee.com/hyx3179/cat-zh/attach_files/1031755/download/cat-zh.zip -OutFile %~dp0cat-zh.zip
+PowerShell Expand-Archive -Path %~dp0cat-zh.zip -Force -DestinationPath %~dp0..\html\
 echo 下载 概览和珂学家
-PowerShell -file upgrade.ps1 -Out %~dp0
+call %~dp0upgrade.bat
+echo 设置 kg.com Hosts
+call %~dp0hosts.bat kg.com
 echo 安装完成 点击 start.cmd 启动 或 main start
 pause
 goto end
 
 :upgrade
-PowerShell -file %~dp0upgrade.ps1 -Out %~dp0
+call %~dp0upgrade.bat
 pause
 goto end
 
 :hosts
-setlocal enabledelayedexpansion
-cd.>%WINDIR%\GetAdmin
-if exist %WINDIR%\GetAdmin (del /f /q "%WINDIR%\GetAdmin") else (
-echo CreateObject^("Shell.Application"^).ShellExecute "%~s0", "%*", "", "runas", 1 >> "%temp%\Admin.vbs"
-"%temp%\Admin.vbs"
-del /s /q "%temp%\Admin.vbs"
-exit /b 2)
-cls
-if {%2}=={edit} goto edit
-echo 输入你需要的域名 xxx.com xxx.net xxx.xyz 类似的
-set/p "name=>"
-echo 127.0.0.1 %name% >> %WINDIR%\System32\drivers\etc\hosts
-goto end
-:edit
-%WINDIR%\System32\notepad.exe %WINDIR%\System32\drivers\etc\hosts
+call %~dp0hosts.bat %2
 goto end
 
 :kill
@@ -90,4 +80,4 @@ del /s /q %~dp0..\logs\nginx.pid
 goto end
 
 :end
-exit 0
+exit
