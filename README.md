@@ -1,7 +1,7 @@
 # 猫国建设者本地版运行脚本
 
-- 默认访问地址 [kg.com](kg.com:3179)
-  - [自动刷领导力版](cheney.io:3179)
+- 默认访问地址 [kg.com](http://kg.com:3179/)
+  - [自动刷领导力版](http://cheney.io:3179/)
 - 推荐使用 **[hosts 功能](#hosts)**
 
 ## 安装
@@ -12,7 +12,7 @@
 
 - 双击 `start.cmd`
 - 启动 `main.cmd` 然后输入 `start`
-  - 会默认打开 [kg.com](kg.com:3179)
+  - 会默认打开 [kg.com](http://kg.com:3179/)
 
 ## 停止
 
