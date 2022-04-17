@@ -57,10 +57,14 @@ PowerShell Expand-Archive -Path %~dp0nginx.zip -Force -DestinationPath %~dp0
 echo 下载 猫国建设者
 PowerShell Invoke-WebRequest -Uri https://gitee.com/hyx3179/cat-zh/attach_files/1031755/download/cat-zh.zip -OutFile %~dp0cat-zh.zip
 PowerShell Expand-Archive -Path %~dp0cat-zh.zip -Force -DestinationPath %~dp0..\html\
+echo 下载 自动领导力
+PowerShell Invoke-WebRequest -Uri https://gitee.com/hyx3179/cat-zh/attach_files/1032506/download/Cheney.zip -OutFile %~dp0Cheney.zip
+PowerShell Expand-Archive -Path %~dp0Cheney.zip -Force -DestinationPath %~dp0..\html\
 echo 下载 概览和珂学家
 call %~dp0upgrade.bat
 echo 设置 kg.com Hosts
 call %~dp0hosts.bat kg.com
+call %~dp0hosts.bat cheney.io
 echo 安装完成 点击 start.cmd 启动 或 main start
 pause
 goto end
