@@ -1,10 +1,14 @@
 @echo off &TITLE Hosts ÎÄ¼þ±à¼­ by hyx3179
+
+find /i "%1" %WINDIR%\System32\drivers\etc\hosts >nul
+if "%errorlevel%"=="0" goto end
+
 setlocal enabledelayedexpansion
-cd.>%WINDIR%\GetAdmin
-if exist %WINDIR%\GetAdmin (del /f /q "%WINDIR%\GetAdmin") else (
+copy nul %WINDIR%\GetAdmin >nul 2>nul
+if exist %WINDIR%\GetAdmin (del /f /q "%WINDIR%\GetAdmin" >nul) else (
 echo CreateObject^("Shell.Application"^).ShellExecute "%~s0", "%*", "", "runas", 1 >> "%temp%\Admin.vbs"
 "%temp%\Admin.vbs"
-del /s /q "%temp%\Admin.vbs"
+del /s /q "%temp%\Admin.vbs" >nul
 exit /b 2)
 cls
 

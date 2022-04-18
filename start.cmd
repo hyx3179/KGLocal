@@ -1,1 +1,1 @@
-.\scripts\main.bat start
+.\scripts\main.bat restart

@@ -3,5 +3,7 @@ logs/*
 NummonCalc.js
 html/cat-zh/*
 html/Cheney/*
+html/res&lib/*
 scripts/nginx*
-scripts/cat-zh.zip
+*.zip
+*.html
